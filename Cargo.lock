@@ -439,7 +439,7 @@ dependencies = [
  "downcast-rs 2.0.2",
  "either",
  "petgraph",
- "ron",
+ "ron 0.10.1",
  "serde",
  "smallvec",
  "thiserror 2.0.17",
@@ -533,7 +533,7 @@ dependencies = [
  "futures-lite",
  "js-sys",
  "parking_lot",
- "ron",
+ "ron 0.10.1",
  "serde",
  "stackfuture",
  "thiserror 2.0.17",
@@ -625,6 +625,7 @@ dependencies = [
  "anyhow",
  "bevy",
  "csv",
+ "ron 0.11.0",
  "serde",
  "thiserror 2.0.17",
 ]
@@ -2191,6 +2192,7 @@ dependencies = [
  "bevy",
  "bevy-tnua-avian3d",
  "bevy_common_assets",
+ "serde",
 ]
 
 [[package]]
@@ -4313,6 +4315,19 @@ name = "ron"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "beceb6f7bf81c73e73aeef6dd1356d9a1b2b4909e1f0fc3e59b034f9572d7b7f"
+dependencies = [
+ "base64",
+ "bitflags 2.10.0",
+ "serde",
+ "serde_derive",
+ "unicode-ident",
+]
+
+[[package]]
+name = "ron"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "db09040cc89e461f1a265139777a2bde7f8d8c67c4936f700c63ce3e2904d468"
 dependencies = [
  "base64",
  "bitflags 2.10.0",
