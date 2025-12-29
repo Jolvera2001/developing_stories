@@ -1,31 +1,36 @@
-use avian3d::prelude::*;
 use bevy::prelude::*;
 use bevy_common_assets::ron::RonAssetPlugin;
+use bevy_rapier3d::prelude::*;
+
+use crate::player::PlayerPlugin;
 
 mod assets_definition;
+mod player;
 
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, PhysicsPlugins::default()))
+        .add_plugins(DefaultPlugins)
+        .add_plugins(RapierPhysicsPlugin::<NoUserData>::default())
+        .add_plugins(RapierDebugRenderPlugin::default())
+        .add_plugins(PlayerPlugin)
         .add_systems(Startup, app_startup)
         .run();
 }
 
 fn app_startup(
     mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>, 
+    mut meshes: ResMut<Assets<Mesh>>,
     mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
     commands.spawn((
-        RigidBody::Static,
+        RigidBody::Fixed,
         Collider::cylinder(4.0, 0.1),
         Mesh3d(meshes.add(Cylinder::new(4.0, 0.1))),
-        MeshMaterial3d(materials.add(Color::WHITE))
+        MeshMaterial3d(materials.add(Color::WHITE)),
     ));
     commands.spawn((
         RigidBody::Dynamic,
         Collider::cuboid(1.0, 1.0, 1.0),
-        AngularVelocity(Vec3::new(2.5, 3.5, 1.5)),
         Mesh3d(meshes.add(Cuboid::from_length(1.0))),
         MeshMaterial3d(materials.add(Color::srgb_u8(124, 144, 255))),
         Transform::from_xyz(0.0, 4.0, 0.0),
